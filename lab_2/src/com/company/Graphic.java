@@ -35,6 +35,7 @@ public class Graphic {
             series.add(i, f.calculate(i));
         }
 
+
         XYDataset xyDataset = new XYSeriesCollection(series);
         JFreeChart chart = ChartFactory
                 .createXYLineChart("y = "+fname, "x", "y",
