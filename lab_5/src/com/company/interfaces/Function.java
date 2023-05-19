@@ -1,2 +1,5 @@
-package com.company.interfaces;public interface Function {
+package com.company.interfaces;
+
+public interface Function {
+    double calculate(double x);
 }
