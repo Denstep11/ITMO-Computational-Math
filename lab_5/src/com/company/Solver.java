@@ -37,6 +37,7 @@ public class Solver {
         differenceTable();
         printDefTable();
         interpolation();
+        showResult();
     }
 
     private void readData() throws ReadDataException {
@@ -75,9 +76,9 @@ public class Solver {
         } else if (Objects.equals(typeIn, "c")) {
             int f, n;
             double x1, x2;
-            System.out.print("Выберете фнукцию: ");
-            System.out.print("1) 2*sin(x)+1");
-            System.out.print("2) cos(x)-2");
+            System.out.println("Выберете фнукцию: ");
+            System.out.println("1) 2*sin(x)+1");
+            System.out.println("2) cos(x)-2");
             f = Integer.parseInt(in.next())-1;
             if(f!=0 && f!=1){
                 throw new ReadDataException();
@@ -90,10 +91,10 @@ public class Solver {
             }
             System.out.print("Введите количество точек на интервале");
             n = Integer.parseInt(in.next());
-            h = (x2-x1)/n;
+            h = (x2-x1)/(n-1);
             x =  new double[n];
             y =  new double[n];
-            for(int i=0;i<=n;i++){
+            for(int i=0;i<n;i++){
                 x[i] = x1+i*h;
                 y[i] = functions[f].calculate(x1+i*h);
             }
@@ -140,5 +141,12 @@ public class Solver {
         gauss.init(fx, h, defy, x, y);
         pn = gauss.solve();
         System.out.println("Приближенное значение функции методом Гаусса f("+fx+") = "+pn);
+        System.out.println("модуль разности методов: "+ Math.abs(ln-pn));
+    }
+
+    private void showResult() {
+        Graphic graphic = new Graphic();
+        graphic.init(x, y, fx, ln, pn);
+        graphic.show();
     }
 }
